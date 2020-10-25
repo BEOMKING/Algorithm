@@ -1,0 +1,15 @@
+A = int(input())
+B = input()
+C = int(B[2:3])
+D = int(B[1:2])
+E = int(B[0:1])
+F = int(B)
+print(A * C)
+print(A * D)
+print(A * E)
+print(A * F)
+
+# 2
+A = int(input())
+B = int(input())
+print(A * (B % 10), A * ((B % 100) // 10), A * (B // 100), A * B)
