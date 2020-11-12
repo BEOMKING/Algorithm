@@ -18,3 +18,14 @@ print(List.count(6))
 print(List.count(7))
 print(List.count(8))
 print(List.count(9))
+
+# A = int(input())
+# B = int(input())
+# C = int(input())
+# result = str(A * B * C)
+# result = list(result)
+# answer = [0] * 10
+# for i in result:
+#     answer[int(i)] += 1
+# for i in answer:
+#     print(i)
