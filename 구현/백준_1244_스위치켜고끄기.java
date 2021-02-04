@@ -58,12 +58,11 @@ public class 백준_1244_스위치켜고끄기 {
         int now = 0;
         switchfunction(intsta, now, student);
         for(int i = 0; i < intsta.length; i++){
-            if(i != 0 && i % 20 == 0){
+            if(i != 0 && i % 20 == 0){ // 21, 41, 61, 81번째에서 줄 바꿈
                 System.out.println();
             }
             System.out.print(intsta[i]);
-            if(i < intsta.length - 1 && i % 20 != 19){
-                System.out.print(" ");
+            if(i < intsta.length - 1 && i % 20 != 19){ // 20의 배수번째는 " " 하지않음음                System.out.print(" ");
             }
         }
     }
