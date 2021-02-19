@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.StringTokenizer;
-
+// 큐를 이용하면 쉬운 문제인데 수학적 방법으로 풀어서 오래걸림
 public class 백준_1158_요세푸스문제 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -19,7 +19,7 @@ public class 백준_1158_요세푸스문제 {
         for (int i = 1; i < N + 1; i++) {
             link.offer(i);
         }
-
+ // q.offer(q.poll()); 큐의 앞 값을 빼서 뒤에 삽입하는 방법
         int index = 0;
         int start = K - 1; // 삭제할 인덱스
         while (!link.isEmpty()) { // 리스트에 값이 없을때까지

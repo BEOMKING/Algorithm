@@ -27,15 +27,17 @@ public class 백준_20299_3대측정 {
             int s = x1 + x2 + x3; // 팀원 능력치 합
             if(s >= S && x1 >= M && x2 >= M && x3 >= M) {
                 count += 1;
-                sb.append(x1 + " "); // StringBuilder로 답을 저장시키면서 속도의 이득을 가져온다.
-                sb.append(x2 + " ");
-                sb.append(x3 + " ");
+//                sb.append(x1 + " "); // StringBuilder로 답을 저장시키면서 속도의 이득을 가져온다.
+//                sb.append(x2 + " ");
+//                sb.append(x3 + " ");
+                bw.write(x1 + " "); // StringBuilder로 답을 저장시키면서 속도의 이득을 가져온다.
+                bw.write(x2 + " ");
+                bw.write(x3 + " ");
             }
         }
         System.out.println(count); // 통과한 동아리 수
-        bw.write(sb.toString()); // BufferedWriter로 한번에 정답을 출력함으로 for문을 사용할 때보다 빠르게 출력할 수 있다.
+//        bw.write(sb.toString()); // BufferedWriter로 한번에 정답을 출력함으로 for문을 사용할 때보다 빠르게 출력할 수 있다.
         bw.flush();
         bw.close();
     }
 }
-

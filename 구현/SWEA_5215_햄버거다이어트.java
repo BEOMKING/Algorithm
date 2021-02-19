@@ -11,24 +11,24 @@ public class SWEA_5215_햄버거다이어트 {
     static int hamberger[][];
     static boolean isselected[];
 
-    static void subset(int count){
+    static void subset(int count, int sumcalorie){
+        if(sumcalorie > L){
+            return;
+        }
         if(count == N){
-            int sumscore = 0, sumcalorie = 0;
+            int sumscore = 0;
             for(int i = 0; i < N; i++){
                 if(isselected[i]){
                     sumscore += hamberger[i][0];
-                    sumcalorie += hamberger[i][1];
                 }
             }
-            if(sumcalorie <= L){
-                max = Math.max(max, sumscore);
-            }
+            max = Math.max(max, sumscore);
             return;
         }
         isselected[count] = true;
-        subset(count + 1);
+        subset(count + 1, sumcalorie + hamberger[count][1]);
         isselected[count] = false;
-        subset(count + 1);
+        subset(count + 1, sumcalorie);
     }
 
     public static void main(String[] args) throws Exception{
@@ -50,7 +50,7 @@ public class SWEA_5215_햄버거다이어트 {
 
                 hamberger[n] = new int[]{Score, Calorie};
             }
-            subset(0);
+            subset(0, 0);
             System.out.print("#" + (t + 1) + " ");
             System.out.println(max);
         }
