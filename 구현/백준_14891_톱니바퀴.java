@@ -7,8 +7,8 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class 백준_14891_톱니바퀴 {
-    static int map[][] = new int[4][8];
-    static boolean check[] = new boolean[4];
+    static int map[][] = new int[4][8]; // 처음 4개의 배열을 만들었으나 이중 배열로 만들면 해결된다.
+    static boolean check[] = new boolean[4]; // 바퀴를 돌렸는지 체크
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -38,23 +38,23 @@ public class 백준_14891_톱니바퀴 {
         System.out.println(result);
     }
     static void checkstatus(int num, int dir) {
-        if(check[num]) return;
+        if(check[num]) return; // 이미 처리한 바퀴면 리턴
         check[num] = true;
 
         int pre = num - 1;
         int next = num + 1;
-        if(pre >= 0){
+        if(pre >= 0){ // 왼쪽에서 돌아갈 것들을 확인하고 변경
             if(map[num][6] != map[pre][2]){
                 checkstatus(pre, (dir == 1) ? -1 : 1);
             }
         }
-        if(next <= 3){
+        if(next <= 3){ // 오른쪽
             if(map[num][2] != map[next][6]){
                 checkstatus(next, (dir == 1) ? -1 : 1);
             }
         }
 
-        move(num, dir);
+        move(num, dir); // 그 이후 본인을 돌린다. 이 부분을 돌려야할 바퀴를 확인하기 전에 처리했었는데 그 부분이 미스였다. 바퀴는 동시에 돌아가므로 미리 돌리면 다른 값이 나온다.
     }
 
     static void move(int num, int dir){

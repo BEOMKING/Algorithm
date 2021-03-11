@@ -33,7 +33,6 @@ public class 백준_5430_AC {
             for (int i = 0; i < n; i++) {
                 array.add(st.nextToken()); // 숫자로 변환 필요 x 메모리 감소
             }
-
             int R = 0; // 뒤집힌 횟수
             boolean error = false; // 에러 확인
             for (char f: function) {
