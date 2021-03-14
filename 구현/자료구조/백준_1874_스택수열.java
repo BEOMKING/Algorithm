@@ -1,4 +1,4 @@
-package 구현;
+package 구현.자료구조;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class 백준_1874_스택수열 {
-    static Queue<Integer> map = new LinkedList<>();
     static Stack<Integer> stack = new Stack<>();
     static int N;
     static StringBuilder sb = new StringBuilder();

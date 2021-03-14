@@ -1,8 +1,8 @@
-package 구현;
+package 구현.자료구조;
 
 import java.util.ArrayList;
 
-public class 기능개발 {
+public class Pro_기능개발 {
     public ArrayList<Integer> solution(int[] progresses, int[] speeds) {
         int value = 0;
         ArrayList<Integer> answer = new ArrayList<>();
