@@ -1,4 +1,4 @@
-package DFSBFS;
+package 최단거리;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -28,10 +28,9 @@ public class 백준_9205_맥주마시면서걸어가지 {
                     if(i == j) continue;
                     int len = Math.abs(location[j].y - location[i].y) + Math.abs(location[j].x - location[i].x);
                     if(len <= 1000){
-                        leng[i][j] = Math.abs(location[j].y - location[i].y) + Math.abs(location[j].x - location[i].x);
-                        leng[j][i] = Math.abs(location[j].y - location[i].y) + Math.abs(location[j].x - location[i].x);
+                        leng[i][j] = len;
                     }else{
-                        leng[i][j] = Integer.MAX_VALUE;
+                        leng[i][j] = 300000;
                     }
                 }
             }
@@ -45,7 +44,7 @@ public class 백준_9205_맥주마시면서걸어가지 {
                     }
                 }
             }
-            if(leng[0][n + 1] != Integer.MAX_VALUE){
+            if(leng[0][n + 1] < 300000){
                 sb.append("happy" + "\n");
             }else{
                 sb.append("sad" + "\n");
@@ -56,7 +55,6 @@ public class 백준_9205_맥주마시면서걸어가지 {
     static class Location{
         int y;
         int x;
-
         public Location(int y, int x) {
             this.y = y;
             this.x = x;
