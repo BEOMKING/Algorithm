@@ -46,12 +46,9 @@ public class 백준_1261_알고스팟 {
                 int nx = now.x + dx[i];
                 if(ny < 0 || ny >= n || nx < 0 || nx >= m) continue;
                 int cost = map[ny][nx];
-                if(cost != 0 && d[ny][nx] > d[now.y][now.x] + cost){
+                if(d[ny][nx] > d[now.y][now.x] + cost){
                     d[ny][nx] = d[now.y][now.x] + cost;
                     queue.offer(new Node(ny, nx, d[ny][nx] + cost));
-                }else if(cost == 0 && d[ny][nx] > d[now.y][now.x]){
-                    d[ny][nx] = d[now.y][now.x];
-                    queue.offer(new Node(ny, nx, d[ny][nx]));
                 }
             }
         }

@@ -24,21 +24,21 @@ public class 백준_1697_숨바꼭질 {
 
         while (!queue.isEmpty()){
             location = queue.poll();
-            if(location.x > 100000 || location.x < 0) continue;
-            if(visited[location.x]) continue;
-            visited[location.x] = true;
-            if(location.x == M){
+            if(location.x > 100000 || location.x < 0) continue; // 수빈이의 위치가 범위 밖으로 갈 경우
+            if(visited[location.x]) continue; // 이미 방문한 경우
+            visited[location.x] = true; // 방문 처리
+            if(location.x == M){ // 도착
                 answer = location.second;
                 break;
             }
 
             for (int i = 0; i < 3; i++) {
-                if(i == 0){
+                if(i == 0){ // 텔포
                     nx = location.x * 2;
                 }else if(i == 1){
-                    nx = location.x + 1;
+                    nx = location.x + 1; // 일보
                 }else{
-                    nx = location.x - 1;
+                    nx = location.x - 1; // 뒤로 일보
                 }
                 queue.offer(new Location(nx, location.second + 1));
             }
