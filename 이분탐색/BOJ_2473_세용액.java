@@ -14,7 +14,7 @@ public class BOJ_2473_세용액 {
         StringTokenizer st;
 
         N = Integer.parseInt(br.readLine()); // 용액 수
-        solution = new long[N]; // 용액
+        solution = new long[N]; // 용액 (long으로 설정해야함 int형으로 값을 더하면 결과가 long형이더라도 범위 밖의 이상한 값이 나올수 있음)
 
         st = new StringTokenizer(br.readLine());
         for (int i = 0; i < N; i++) {
