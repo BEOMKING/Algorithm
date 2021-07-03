@@ -23,7 +23,7 @@ public class BOJ_21610_마법사상어와비바라기 {
         M = Integer.parseInt(st.nextToken()); // 이동 횟수
         water = new int[N + 1][N + 1];
         groom = new boolean[N + 1][N + 1];
-        groom[N][1] = true; groom[N][2] = true; groom[N - 1][1] = true; groom[N - 1][2] = true;
+        groom[N][1] = true; groom[N][2] = true; groom[N - 1][1] = true; groom[N - 1][2] = true; // 구름 위치
 
         for (int i = 1; i <= N; i++) {
             st = new StringTokenizer(br.readLine());
@@ -48,6 +48,7 @@ public class BOJ_21610_마법사상어와비바라기 {
         }
         System.out.print(result);
     }
+
     public static int mod(int n){
         if(n > N){
             n %= N;
@@ -68,7 +69,6 @@ public class BOJ_21610_마법사상어와비바라기 {
         }
 
     }
-
     private static void copy() {
         while (!q.isEmpty()){
             Location now = q.poll();
@@ -110,7 +110,6 @@ public class BOJ_21610_마법사상어와비바라기 {
     }
     public static class Location{
         int y, x;
-
         public Location(int y, int x) {
             this.y = y;
             this.x = x;
