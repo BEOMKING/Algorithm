@@ -60,7 +60,7 @@ public class BOJ_4803_트리 {
         if(xRoot == yRoot) {
             parents[yRoot] = 0;
             parents[xRoot] = 0;
-        }else if(xRoot < yRoot) parents[yRoot] = xRoot;
+        } else if(xRoot < yRoot) parents[yRoot] = xRoot;
         else parents[xRoot] = yRoot;
 
     }
