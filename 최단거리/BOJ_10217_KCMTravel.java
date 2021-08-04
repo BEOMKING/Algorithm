@@ -55,7 +55,6 @@ public class BOJ_10217_KCMTravel {
                         if(dp[info.start][j] > sumDist) dp[info.start][j] = sumDist;
                     }
 
-                    dp[info.start][sumCost] = sumDist;
                     pq.add(new Info(info.start, sumCost, sumDist));
                 }
             }
