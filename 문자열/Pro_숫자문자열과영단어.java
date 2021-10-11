@@ -1,4 +1,4 @@
-package 구현.문자열;
+package 문자열;
 
 public class Pro_숫자문자열과영단어 {
     public static int solution(String s) {

@@ -1,4 +1,4 @@
-package 구현.문자열;
+package 문자열;
 
 import java.util.Arrays;
 
