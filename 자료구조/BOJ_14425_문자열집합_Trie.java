@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
+// 시간 복잡도 삽입(N(문자열의 개수 10000) x L(최대 개수 500)) + 탐색(M(문자열의 개수 10000) x L(최대 개수 500)) == NL
 public class BOJ_14425_문자열집합_Trie {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
