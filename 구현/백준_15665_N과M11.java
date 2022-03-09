@@ -1,16 +1,19 @@
-package 완전탐색;
+package 구현;
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class 백준_15650_N과M2 {
+public class 백준_15665_N과M11 {
     static int N;
     static int M;
     static int numbers[];
+    static boolean isselected[];
+    static int array[];
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-    static void combi(int start, int count) throws IOException{
+    static void overlapper(int count) throws IOException {
         if(count == M){
             for(int num : numbers){
                 bw.write(num + " ");
@@ -18,11 +21,15 @@ public class 백준_15650_N과M2 {
             bw.newLine();
             return;
         }
-
-        for(int i = start; i <= N; i++){
-            numbers[count] = i;
-            combi(i + 1, count + 1);
-
+        int num = 0;
+        for(int i = 0; i < N; i++){
+            if(num != array[i]){
+                numbers[count] = array[i];
+//                isselected[i] = true;
+                overlapper(count + 1);
+                num = array[i];
+//                isselected[i] = false;
+            }
         }
     }
     public static void main(String[] args) throws IOException {
@@ -30,9 +37,17 @@ public class 백준_15650_N과M2 {
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
         numbers = new int[M];
+        isselected = new boolean[N];
+        array = new int[N];
+        st = new StringTokenizer(br.readLine());
+        for(int i = 0; i < N; i++){
+            array[i] = Integer.parseInt(st.nextToken());
+        }
+        Arrays.sort(array);
 
-        combi(1, 0);
+        overlapper(0);
         bw.flush();
         bw.close();
+
     }
 }

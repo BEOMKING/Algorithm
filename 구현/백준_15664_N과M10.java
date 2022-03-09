@@ -1,10 +1,9 @@
-package 완전탐색;
+package 구현;
 
 import java.io.*;
-import java.util.Arrays;
-import java.util.StringTokenizer;
+import java.util.*;
 
-public class 백준_15655_N과M6 {
+public class 백준_15664_N과M10 {
     static int N;
     static int M;
     static int numbers[];
@@ -20,9 +19,13 @@ public class 백준_15655_N과M6 {
             bw.newLine();
             return;
         }
-        for(int i = start; i < N; i++){
-            numbers[count] = array[i];
-            reversecombi(i + 1, count + 1);
+        int num = 0;
+        for(int i = start; i < N; i++) {
+            if (num != array[i]) {
+                numbers[count] = array[i];
+                reversecombi(i + 1, count + 1);
+                num = array[i];
+            }
         }
     }
 
@@ -45,3 +48,4 @@ public class 백준_15655_N과M6 {
         bw.close();
     }
 }
+

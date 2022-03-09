@@ -1,4 +1,4 @@
-package 완전탐색;
+package 구현;
 
 import java.util.Arrays;
 
