@@ -6,25 +6,20 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class 백준_1149_RGB거리 {
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = null;
+        StringTokenizer st;
 
         int N = Integer.parseInt(br.readLine());
-        int map[][] = new int[N + 1][3];
-        int value[][] = new int[N + 1][3];
-        for (int i = 1; i <= N; i++) {
-            st = new StringTokenizer(br.readLine());
-            for (int j = 0; j < 3; j++) {
-                map[i][j] = Integer.parseInt(st.nextToken());
-            }
-        }
+        int[][] dp = new int[N + 1][3];
 
         for (int i = 1; i <= N; i++) {
-            value[i][0] = Math.min(value[i - 1][1], value[i - 1][2]) + map[i][0];
-            value[i][1] = Math.min(value[i - 1][0], value[i - 1][2]) + map[i][1];
-            value[i][2] = Math.min(value[i - 1][0], value[i - 1][1]) + map[i][2];
+            st = new StringTokenizer(br.readLine());
+            dp[i][0] = Math.min(dp[i - 1][1], dp[i - 1][2]) + Integer.parseInt(st.nextToken());
+            dp[i][1] = Math.min(dp[i - 1][0], dp[i - 1][2]) + Integer.parseInt(st.nextToken());
+            dp[i][2] = Math.min(dp[i - 1][0], dp[i - 1][1]) + Integer.parseInt(st.nextToken());
         }
-        System.out.print(Math.min(Math.min(value[N][0], value[N][1]), value[N][2]));
+        System.out.println(Math.min(Math.min(dp[N][0], dp[N][1]), dp[N][2]));
     }
 }

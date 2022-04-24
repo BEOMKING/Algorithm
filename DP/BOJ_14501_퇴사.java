@@ -6,28 +6,28 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class BOJ_14501_퇴사 {
+    static int N;
+    static int[] T, P, dp;
+    // 작은 문제로 바꿀 수 있고 언제 구해도 같은 값이 나온다면 DP 가능
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = null;
+        StringTokenizer st;
 
-        int N = Integer.parseInt(br.readLine()); // 남은 근무일 수
-        int CT[] = new int[N + 1];
-        int Value[] = new int[N + 1];
-        int DP[] = new int[N + 1];
-
-        for (int n = 1; n <= N; n++) {
+        N = Integer.parseInt(br.readLine());
+        T = new int[N + 1];
+        P = new int[N + 1];
+        for (int i = 1; i <= N; i++) {
             st = new StringTokenizer(br.readLine());
-            CT[n] = Integer.parseInt(st.nextToken());
-            Value[n] = Integer.parseInt(st.nextToken());
+            T[i] = Integer.parseInt(st.nextToken());
+            P[i] = Integer.parseInt(st.nextToken());
         }
-
-        for (int i = 1; i <= N; i++) { // 상담 일자
-            int end = i + CT[i] - 1;
-            if (end <= N) {
-                DP[end] = Math.max(DP[end], DP[i - 1] + Value[i]);
+        dp = new int[N + 2];
+        for (int i = 1; i <= N; i++) {
+            if (i + T[i] <= N + 1) {
+                dp[i + T[i]] = Math.max(dp[i + T[i]], dp[i] + P[i]);
             }
-            DP[i] = Math.max(DP[i], DP[i - 1]);
+            dp[i + 1] = Math.max(dp[i + 1], dp[i]);
         }
-        System.out.print(DP[N]);
+        System.out.println(dp[N + 1]);
     }
 }
