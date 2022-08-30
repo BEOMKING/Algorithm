@@ -15,47 +15,64 @@ public class BOJ_2056_작업 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
-        List<Integer>[] followUpTasks = new List[N + 1];
-        int[] requiredTime = new int[N + 1];
-        int[] degree = new int[N + 1];
+        Task[] tasks = new Task[N + 1];
 
         for (int currentTask = 1; currentTask <= N; currentTask++) {
-            followUpTasks[currentTask] = new ArrayList<>();
             String[] inputs = br.readLine().split(" ");
-            requiredTime[currentTask] = Integer.parseInt(inputs[0]);
-            degree[currentTask] = Integer.parseInt(inputs[1]);
-            for (int i = 2; i < degree[currentTask] + 2; i++) {
-                int priorTask = Integer.parseInt(inputs[i]);
-                followUpTasks[priorTask].add(currentTask);
+            int requiredTime = Integer.parseInt(inputs[0]);
+            int inDegree = Integer.parseInt(inputs[1]);
+
+            for (int i = 2; i < 2 + inDegree; i++) {
+                int priorTaskIndex = Integer.parseInt(inputs[i]);
+                Task priorTask = tasks[priorTaskIndex];
+                priorTask.followUpTasks.add(currentTask);
             }
+
+            tasks[currentTask] = new Task(requiredTime, new ArrayList<>(), inDegree);
         }
 
         Queue<Integer> queue = new LinkedList<>();
-        int[] endTime = new int[N + 1];
-        for (int currentTask = 1; currentTask <= N; currentTask++) {
-            if (degree[currentTask] == 0) {
-                queue.add(currentTask);
-                endTime[currentTask] = requiredTime[currentTask];
+        for (int i = 1; i <= N; i++) {
+            Task task = tasks[i];
+            if (task.inDegree == 0) {
+                queue.add(i);
+                task.endTime = task.requiredTime;
             }
         }
 
         while (!queue.isEmpty()) {
-            int currentTask = queue.poll();
-            for (int followUpTask : followUpTasks[currentTask]) {
-                degree[followUpTask] -= 1;
-                endTime[followUpTask] = Math.max(endTime[followUpTask], endTime[currentTask] + requiredTime[followUpTask]);
+            int taskIndex = queue.poll();
+            Task currentTask = tasks[taskIndex];
+            List<Integer> followUpTasks = currentTask.followUpTasks;
 
-                if (degree[followUpTask] == 0) {
-                    queue.add(followUpTask);
+            for (int followUpTaskIndex: followUpTasks) {
+                Task followUpTask = tasks[followUpTaskIndex];
+                followUpTask.endTime = Math.max(followUpTask.endTime, currentTask.endTime + followUpTask.requiredTime);
+
+                if (--followUpTask.inDegree == 0) {
+                    queue.add(followUpTaskIndex);
                 }
             }
         }
 
         int maxTime = 0;
         for (int i = 1; i <= N; i++) {
-            maxTime = Math.max(maxTime, endTime[i]);
+            maxTime = Math.max(maxTime, tasks[i].endTime);
         }
         System.out.println(maxTime);
+    }
+
+    static class Task {
+        int requiredTime;
+        List<Integer> followUpTasks;
+        int inDegree;
+        int endTime;
+
+        public Task(int requiredTime, List<Integer> followUpTasks, int inDegree) {
+            this.requiredTime = requiredTime;
+            this.followUpTasks = followUpTasks;
+            this.inDegree = inDegree;
+        }
     }
 
     static Integer solution() throws IOException {
