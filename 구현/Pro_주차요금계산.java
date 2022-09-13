@@ -3,66 +3,55 @@ package 구현;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
-
-public class Pro_주차요금계산 {
-    public int baseTime, basePrice, unitTime, unitPrice;
-    public Map<String, Integer> inParkingLot = new HashMap<>();
-    public Map<String, Integer> outParkingLot = new TreeMap<>();
-
+class Pro_주차요금계산 {
     public int[] solution(int[] fees, String[] records) {
-        baseTime = fees[0]; basePrice = fees[1]; unitTime = fees[2]; unitPrice = fees[3];
+        Map<String, Integer> recordByCars = new HashMap<>();
+        Map<String, Integer> prefixSumByCars = new TreeMap<>();
 
         for (String record : records) {
-            String[] split = record.split(" ");
-            String time = split[0], number = split[1], type = split[2];
+            String[] splits = record.split(" ");
+            Integer time = convert(splits[0]);
+            String number = splits[1];
+            String type = splits[2];
 
-            if (type.equals("IN")) in(number, timeConverter(time));
-            if (type.equals("OUT")) out(number, timeConverter(time));
+            if (type.equals("IN")) {
+                recordByCars.put(number, time);
+
+                if (!prefixSumByCars.containsKey(number)) {
+                    prefixSumByCars.put(number, 0);
+                }
+            }
+
+            if (type.equals("OUT")) {
+                Integer diff = time - recordByCars.get(number);
+                prefixSumByCars.put(number, prefixSumByCars.get(number) + diff);
+                recordByCars.remove(number);
+            }
         }
 
-        for (String number : inParkingLot.keySet()) {
-//            outRecord(number, outTime - inParkingLot.get(number));
-//            inParkingLot.remove(number);
-//            기존 코드 map을 제거하면서 순회하기 때문에 에러
-            outRecord(number, 1439 - inParkingLot.get(number));
-        }
+        recordByCars.forEach((key, value) -> {
+            Integer diff = convert("23:59") - value;
+            prefixSumByCars.put(key, prefixSumByCars.get(key) + diff);
+        });
 
-        int[] answer = new int[outParkingLot.size()];
+        int[] answer = new int[prefixSumByCars.size()];
         int i = 0;
-        for (String number : outParkingLot.keySet()) {
-            answer[i++] = basePrice + calAdditionalPrice(outParkingLot.get(number));
+
+        for (int value : prefixSumByCars.values()) {
+            answer[i] = fees[1];
+
+            if (value > fees[0]) {
+                answer[i] += Math.ceil((value - fees[0]) / (double) fees[2]) * fees[3];
+            }
+
+            i++;
         }
 
         return answer;
     }
 
-    public void out(String number, int outTime) {
-        outRecord(number, outTime - inParkingLot.get(number));
-        inParkingLot.remove(number);
-    }
-
-    public void outRecord(String number, int stayTime) {
-        if (outParkingLot.containsKey(number)) {
-            outParkingLot.put(number, outParkingLot.get(number) + stayTime);
-        } else {
-            outParkingLot.put(number, stayTime);
-        }
-    }
-
-    public void in(String number, int inTime) {
-        inParkingLot.put(number, inTime);
-    }
-
-    public int calAdditionalPrice(int stayTime) {
-        if (baseTime >= stayTime) return 0;
-        int additionalTime = stayTime - baseTime;
-        if (additionalTime % unitTime == 0) {
-            return (additionalTime / unitTime) * unitPrice;
-        }
-        return (additionalTime / unitTime + 1) * unitPrice;
-    }
-
-    public int timeConverter(String time) {
-        return Integer.parseInt(time.substring(0, 2)) * 60 + Integer.parseInt(time.substring(3));
+    Integer convert(String time) {
+        String[] splitTime = time.split(":");
+        return Integer.parseInt(splitTime[0]) * 60 + Integer.parseInt(splitTime[1]);
     }
 }
