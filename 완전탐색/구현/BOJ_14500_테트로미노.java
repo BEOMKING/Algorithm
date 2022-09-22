@@ -1,4 +1,4 @@
-package 완전탐색.완전탐색;
+package 완전탐색.구현;
 
 import java.io.BufferedReader;
 import java.io.IOException;

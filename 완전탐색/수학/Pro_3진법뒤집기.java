@@ -1,4 +1,4 @@
-package 수학;
+package 완전탐색.수학;
 
 import java.util.ArrayList;
 import java.util.List;
