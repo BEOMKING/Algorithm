@@ -1,4 +1,4 @@
-package 완전탐색.구현;
+package 완전탐색.문자열;
 
 import java.util.ArrayList;
 import java.util.HashMap;

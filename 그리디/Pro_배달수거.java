@@ -1,4 +1,4 @@
-package 완전탐색.DP;
+package 그리디;
 
 class Pro_배달수거 {
     /**
