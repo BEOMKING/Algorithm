@@ -9,38 +9,30 @@ import java.util.StringTokenizer;
 
 public class BOJ_1026_보물 {
 
-    static int N;
-    static int[] A;
-    static Integer[] B;
-    static int result;
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st;
+        int N = Integer.parseInt(br.readLine());
+        Integer[] A = new Integer[N];
+        Integer[] B = new Integer[N];
 
-        N = Integer.parseInt(br.readLine());
-        A = new int[N];
-        B = new Integer[N];
-        st = new StringTokenizer(br.readLine());
-
+        String[] input = br.readLine().split(" ");
         for (int i = 0; i < N; i++) {
-            A[i] = Integer.parseInt(st.nextToken());
+            A[i] = Integer.parseInt(input[i]);
         }
 
-        st = new StringTokenizer(br.readLine());
+        input = br.readLine().split(" ");
         for (int i = 0; i < N; i++) {
-            B[i] = Integer.parseInt(st.nextToken());
+            B[i] = Integer.parseInt(input[i]);
         }
 
         Arrays.sort(A);
         Arrays.sort(B, Collections.reverseOrder());
-        result = 0;
 
+        int sum = 0;
         for (int i = 0; i < N; i++) {
-            result += A[i] * B[i];
+            sum += A[i] * B[i];
         }
 
-        System.out.println(result);
+        System.out.println(sum);
     }
-
 }
