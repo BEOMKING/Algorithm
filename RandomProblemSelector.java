@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 public class RandomProblemSelector {
-    static List<String> problems = Arrays.asList(
+    static List<String> practice = Arrays.asList(
             "14888번 - 연산자 끼워넣기", "14889번 - 스타트와 링크", "14225번 - 부분수열의 합", "1062번 - 가르침",
             "13460번 - 구슬 탈출 2", "12100번 - 2048 (Easy)", "2003번 - 수들의 합 2", "1806번 - 부분합",
             "1644번 - 소수의 연속합", "1208번 - 부분수열의 합 2", "2143번 - 두 배열의 합",
@@ -21,7 +21,9 @@ public class RandomProblemSelector {
             "5557번 - 1학년", "17144번 - 미세먼지 안녕!", "17143번 - 낚시왕",
             "17140번 - 이차원 배열과 연산", "17780번 - 새로운 게임", "17837번 - 새로운 게임 2", "17822번 - 원판 돌리기",
             "16939번 - 2×2×2 큐브", "16974번 - 레벨 햄버거", "20061번 - 모노미노도미노 2", "19236번 - 청소년 상어",
-            "19237번 - 어른 상어", "16968번 - 차량 번호판 1", "16917번 - 양념 반 후라이드 반", "16922번 - 로마 숫자 만들기",
+            "19237번 - 어른 상어");
+
+        static List<String> problem = Arrays.asList("16968번 - 차량 번호판 1", "16917번 - 양념 반 후라이드 반", "16922번 - 로마 숫자 만들기",
             "16924번 - 십자가 찾기", "16936번 - 나3곱2", "16937번 - 두 스티커", "16938번 - 캠프 준비", "16943번 - 숫자 재배치",
             "16637번 - 괄호 추가하기", "15683번 - 감시", "17088번 - 등차수열 변환", "15686번 - 치킨 배달", "2210번 - 숫자판 점프",
             "2422번 - 한윤정이 이탈리아에 가서 아이스크림을 사먹는데", "17089번 - 세 친구", "17406번 - 배열 돌리기 4",
@@ -41,8 +43,8 @@ public class RandomProblemSelector {
             "5373번 - 큐빙", "1325 효율적인 해킹", "1620 나는야 포켓몬 마스터 이다솜", "2234 성곽", "2629 양팔저울", "2979 트럭 주차");
 
     public static void main(String[] args) {
-        Collections.shuffle(problems);
+        Collections.shuffle(practice);
         Random random = new Random();
-        System.out.print(problems.get(random.nextInt(problems.size() + 1)));
+        System.out.print(practice.get(random.nextInt(practice.size() + 1)));
     }
 }
