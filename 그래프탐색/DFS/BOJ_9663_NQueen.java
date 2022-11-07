@@ -1,9 +1,8 @@
-package 완전탐색.DFS;
+package 그래프탐색.DFS;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.StringTokenizer;
 
 public class BOJ_9663_NQueen {
     static int[][] maps;

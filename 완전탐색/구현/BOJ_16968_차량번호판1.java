@@ -5,38 +5,31 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class BOJ_16968_차량번호판1 {
-    private static int targetLength;
-    private static String form;
-    private static int licensePlateCount = 0;
+    static char[] forms;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        form = br.readLine();
-        targetLength = form.length();
-
-        bruteForce(0, "");
-
-        System.out.println(licensePlateCount);
+        forms = br.readLine().toCharArray();
+        char start = forms[0];
+        System.out.println(dfs(start == 'c' ? 26 : 10, 1));
     }
 
-    private static void bruteForce(int count, String licensePlate) {
-        if (count == targetLength) {
-            licensePlateCount++;
-            return;
+    private static int dfs(int prefix, int count) {
+        if (count == forms.length) {
+            return prefix;
         }
 
-        char now = form.charAt(count);
-        if (now == 'c') {
-            for (char c = 'a'; c <= 'z'; c++) {
-                if (count == 0 || licensePlate.charAt(count - 1) != c) {
-                    bruteForce(count + 1, licensePlate + c);
-                }
+        if (forms[count - 1] == forms[count]) {
+            if (forms[count] == 'd') {
+                return dfs(prefix * 9, count + 1);
+            } else {
+                return dfs(prefix * 25, count + 1);
             }
         } else {
-            for (char d = '0'; d <= '9'; d++) {
-                if (count == 0 || licensePlate.charAt(count - 1) != d) {
-                    bruteForce(count + 1, licensePlate + d);
-                }
+            if (forms[count] == 'd') {
+                return dfs(prefix * 10, count + 1);
+            } else {
+                return dfs(prefix * 26, count + 1);
             }
         }
     }

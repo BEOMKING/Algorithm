@@ -1,4 +1,4 @@
-package 완전탐색.DFS;
+package 그래프탐색.DFS;
 
 class Pro_미로탈출 {
     int[] dy = {1, 0, 0, -1};

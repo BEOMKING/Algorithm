@@ -1,4 +1,4 @@
-package 완전탐색.DFS;
+package 그래프탐색.DFS;
 
 import java.io.BufferedReader;
 import java.io.IOException;

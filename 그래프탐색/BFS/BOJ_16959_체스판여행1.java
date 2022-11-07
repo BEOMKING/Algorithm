@@ -1,4 +1,4 @@
-package 완전탐색.BFS;
+package 그래프탐색.BFS;
 
 import java.io.BufferedReader;
 import java.io.IOException;
