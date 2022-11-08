@@ -1,66 +1,19 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.Queue;
 
-// 시간 제한이 0.25초로 매우 짧다. 약 25000000의 연산
-// 동생이 최대 범위를 넘어서는 시간은 약 1000초이다.
-// 한 번 방문한 장소에 오는 경우에도 동생을 만날 경우가 있다.
-// 3   4  6 9 13 // 동생
-// 10 11 10 9 10 // 수빈
+/**
+ * 반반치킨 두 마리를 사는 것 == 후라이드, 양념 한 마리씩 사는 것
+ * 2 * 반반 < 후1 + 양1 이라면 반반을 사는 것이 이득이다.
+ * 다만 정량이 아닌 최소 값만 넘으면 되기 때문에 이상을 사도 된다.
+ * 이러면 경우의 수는 3가지이다.
+ * 1. 반반이 너무 싸서 반반으로만 모두 사는 경우
+ * 2. 반반으로 교집합만큼 사고 나머지를 각각 사는 경우
+ * 3. 반반이 비싸서 각각 사는게 나은 경우
+ */
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String[] inputs = br.readLine().split(" ");
-        int N = Integer.parseInt(inputs[0]);
-        int K = Integer.parseInt(inputs[1]);
 
-        if (N == K) {
-            System.out.println(0);
-            return;
-        }
-
-        boolean[][] maps = new boolean[2][500001];
-        Queue<Integer> queue = new LinkedList<>();
-        queue.add(N);
-        maps[0][N] = true;
-        int mod, time = 0;
-
-        while (!queue.isEmpty()) {
-            Integer size = queue.size();
-            time++;
-            mod = time % 2;
-            K += time;
-
-            if (K > 500000) {
-                System.out.println(-1);
-                break;
-            }
-
-            for (int i = 0; i < size; i++) {
-                int now = queue.poll();
-
-                if (now - 1 > 0 && !maps[mod][now - 1]) {
-                    queue.add(now - 1);
-                    maps[mod][now - 1] = true;
-                }
-
-                if (now + 1 <= 500000 && !maps[mod][now + 1]) {
-                    queue.add(now + 1);
-                    maps[mod][now + 1] = true;
-                }
-
-                if (now * 2 <= 500000 && !maps[mod][now * 2]) {
-                    queue.add(now * 2);
-                    maps[mod][now * 2] = true;
-                }
-            }
-
-            if (maps[mod][K]) {
-                System.out.println(time);
-                break;
-            }
-        }
     }
 }
