@@ -13,3 +13,5 @@
 *.iws
 .DS-Store
 /company
+Main.java
+Solution.java
