@@ -5,50 +5,88 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class BOJ_1913_달팽이 {
+    private static int[] dy;
+    private static int[] dx;
+    private static int[][] map;
+    private static int n, find, findY, findX;
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        n = Integer.parseInt(br.readLine());
+        find = Integer.parseInt(br.readLine());
+        map = new int[n][n];
+
+//        snail();
+        reverseSnail();
+
         StringBuilder sb = new StringBuilder();
-        int N = Integer.parseInt(br.readLine());
-        int M = Integer.parseInt(br.readLine());
-
-        int[][] map = new int[N + 1][N + 1];
-        int y = (N + 1) / 2; int x = (N + 1) / 2; // 중앙 위치
-        map[y][x] = 1; // 초기값
-        int direction = 0; // 초기 방향
-        int move = 1; // 규칙 2번 같은 횟수로 움직이면 이동횟수 1 증가
-        int count = 0; // 같은 방향으로 움직인 횟수
-        int two = 0;
-        int[] dy = {-1, 0, 1, 0};
-        int[] dx = {0, 1, 0, -1};
-        int[] result = {y, x}; // 첫번째 값이 1에서 시작하므로 1의 위치로 초기화 (2부터는 아래 로직에서 처리 가능)
-
-        for (int i = 2; i <= N * N; i++) {
-            y += dy[direction];
-            x += dx[direction];
-            if(M == i) {
-                result[0] = y;
-                result[1] = x;
-            }
-            map[y][x] = i;
-            if(++count == move){ // 같은 방향으로 현재 움직임 가능 횟수만큼 이동했다면 방향 전환
-                direction++;
-                direction %= 4;
-                count = 0; // 방향 전환 후 움직임 횟수 초기화
-                if(++two == 2){ // 방향 전환을 두 번했다면 움직임 가능 횟수 증가
-                    move++;
-                    two = 0; // 움직임 가능 횟수 사용 횟수 초기화
-                }
-            }
-
-        }
-        for (int i = 1; i <= N; i++) {
-            for (int j = 1; j <= N; j++) {
-                sb.append(map[i][j] + " ");
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                sb.append(map[i][j]).append(" ");
             }
             sb.append("\n");
         }
-        sb.append(result[0] + " " + result[1]);
+
+        sb.append(findY + 1).append(" ").append(findX + 1);
         System.out.println(sb);
     }
 
+    private static void snail() {
+        dy = new int[]{-1, 0, 1, 0};
+        dx = new int[]{0, 1, 0, -1};
+        int y = n / 2, x = n / 2;
+        int now = 2;
+        map[y][x] = 1;
+        findY = y; findX = x;
+        int direction = 0;
+        int range = 1;
+
+        while (true) {
+            for (int i = 0; i < range; i++) {
+                y += dy[direction];
+                x += dx[direction];
+
+                if (now == find) {
+                    findY = y;
+                    findX = x;
+                }
+
+                map[y][x] = now++;
+                if (now > n * n) return;
+            }
+
+            direction = (direction + 1) % 4;
+            if (direction % 2 == 0) {
+                range++;
+            }
+        }
+    }
+
+    private static void reverseSnail() {
+        dy = new int[]{1, 0, -1, 0};
+        dx = new int[]{0, 1, 0, -1};
+        int now = n * n;
+        map[0][0] = now;
+        int y = 0, x = 0;
+        int direction = 0;
+
+        while (true) {
+            while (true) {
+                int ny = y + dy[direction];
+                int nx = x + dx[direction];
+                if (ny < 0 || ny >= n || nx >= n || map[ny][nx] != 0) break;
+
+                if (--now == find) {
+                    findY = ny;
+                    findX = nx;
+                }
+
+                map[ny][nx] = now;
+                y = ny; x = nx;
+            }
+
+            direction = (direction + 1) % 4;
+            if (now == 1) break;
+        }
+    }
 }
