@@ -1,4 +1,4 @@
-package 분할정복.재귀;
+package divide_conquer;
 
 import java.io.BufferedReader;
 import java.io.IOException;
