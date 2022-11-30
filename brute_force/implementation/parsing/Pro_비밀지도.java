@@ -1,4 +1,4 @@
-package brute_force.구현.parsing;
+package brute_force.implementation.parsing;
 
 public class Pro_비밀지도 {
     public String[] solution(int n, int[] arr1, int[] arr2) {

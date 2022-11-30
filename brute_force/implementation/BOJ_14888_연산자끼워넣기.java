@@ -1,4 +1,4 @@
-package brute_force.구현;
+package brute_force.implementation;
 
 import java.io.BufferedReader;
 import java.io.IOException;

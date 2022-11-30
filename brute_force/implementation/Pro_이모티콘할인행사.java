@@ -1,4 +1,4 @@
-package brute_force.구현;
+package brute_force.implementation;
 
 class Pro_이모티콘할인행사 {
     int[] discountRate;

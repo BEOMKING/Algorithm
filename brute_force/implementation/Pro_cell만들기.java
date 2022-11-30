@@ -1,4 +1,4 @@
-package brute_force.구현;
+package brute_force.implementation;
 
 import java.util.ArrayList;
 import java.util.List;
