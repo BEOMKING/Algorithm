@@ -1,35 +1,20 @@
 package study;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
+// 만약 파킹존의 크기가 컸다면 어떤 알고리즘을 사용해야 할까요?
+// 그러면 다익스트라 알고리즘을 사용했을 것 같습니다.
+// 다익스트라 알고리즘은 한 정점에서 다른 모든 정점까지의 최단 경로를 구하는 알고리즘입니다.
+// 그러면 이 문제에서는 모든 정점에서 다른 모든 정점까지의 최단 경로를 구해야 하기 때문에
+// 모든 정점에서 다익스트라 알고리즘을 실행해야 합니다.
+// 그러면 시간 복잡도는 O(N^2 * logN)이 됩니다.
 class KaKaoMobility_2022_하반기_2차_2 {
-    /**
-     * 이 문제는 임의의 파킹존 두 지점을 선택해서 올 수 있는 사람들에게 최대 대여해줄 수 있는 차량의 수를 구하는 문제
-     *
-     * 이 문제에서 해결해야할 부분을
-     * 1. 각 파킹존 사이의 거리를 구하는 것
-     * 2. 임의의 파킹존 두 지점을 선택하고 해당 파킹존에 올 수 있는 유저들을 구하는 것
-     *
-     * 각 파킹존 사이의 거리를 구하는 것은 파킹존의 개수가 50개 이하이므로 플로이드 와샬 알고리즘을 사용했다.
-     *
-     * 그리고 임의의 파킹존 두 지점을 선택한다.
-     * 이때, 문제는 두 파킹존에 접근할 수 있는 구역이 겹치는 경우가 있을 수 있다는 것이다.
-     * 이를 해결하기 위해 각 파킹존에 접근할 수 있는 구역을 구하고, 두 파킹존에 접근할 수 있는 구역이 겹치는지 확인한다.
-     * 겹치지 않는 구역에 대해 우선적으로 인원을 배치하고, 차량이 남는 경우에만 겹치는 구역에서 인원을 배치한다.
-     *
-     * 이렇게 하면 각 파킹존에 접근할 수 있는 구역이 겹치는 경우에도 최대한 많은 인원을 배치할 수 있다.
-     *
-     * @param n <= 50
-     * @param edges <= n * (n - 1) / 2 <= 1225, {시작 장소, 도착 장소, 거리}
-     * @param users <= n, 0 <= users[i] <= ?
-     * @param d <= 5000, 유저가 이동할 수 있는 최대 거리
-     * @param limit 파킹존에 주차할 수 있는 최대 차량 수
-     * @return 최대 대여할 수 있는 차량의 수
-     */
+    // 이 문제는 두 개의 임의의 파킹존을 선택하고 올 수 있는 사람들에게 최대한 많이 대여를 시키는 문제입니다.
+    // 임의의 파킹존을 선택하는 경우의 수는 파킹존의 수가 그렇게 많지 않기 때문에 모든 경우의 수를 구해도 됩니다.
+    // 그러면 유저가 이동할 수 있는 거리의 한계가 있기 때문에 파킹존과의 거리를 구해야 한다고 생각했습니다.
     public int solution(int n, int[][] edges, int[] users, int d, int limit) {
-        // 각 파킹존 사이의 거리를 구하는 플로이드 와샬 알고리즘
+        // 파킹존 사이의 거리를 구하기 위해 플로이드 와샬 알고리즘을 사용했습니다.
+        // 그 이유는 파킹존의 크기가 작기 때문에 모든 경우의 수를 구해도 시간이 오래 걸리지 않기 때문입니다.
         int[][] distance = new int[n + 1][n + 1];
         for (int i = 1; i <= n; i++) {
             Arrays.fill(distance[i], 100000);
@@ -47,10 +32,12 @@ class KaKaoMobility_2022_하반기_2차_2 {
                 }
             }
         }
-
-        // 기존 풀이
-        // 파킹존을 선택할 수 있는 모든 경우의 수를 구한다.
-        // 경우의 수에서 각각의 경우에 대해 최대 대여할 수 있는 차량의 수를 구한다.
+        // 이후에 로직은 시간이 부족해서 제대로 구현하지 못했습니다.
+        // 만약 시간이 더 있었다면 파킹존을 선택하는 경우의 수를 구하고 파킹존에 올 수 있는 사람들을 구해서 차량을 배치하는 로직을 구현했을 것 같습니다.
+        // 위에서 구한 거리를 이용해서 파킹존에 올 수 있는 사람들을 구하는데 하나 고려해야할 점이 있습니다.
+        // 양쪽 파킹존에 모두 갈 수 있는 사람들이 있는데 이들을 어디에 배치해야 할지 고민이 있었습니다.
+        // 그래서 하나의 파킹존에 도착할 수 있는 사람들을 먼저 구해서 차량을 대여시키고
+        // 그래도 남는 차량이 있다면 양쪽 파킹존에 도착할 수 있는 사람들에게 차량을 대여시키는 로직을 구현했을 것 같습니다.
         int answer = 0;
         for (int i = 1; i <= n; i++) {
             int first = 0;
@@ -72,69 +59,6 @@ class KaKaoMobility_2022_하반기_2차_2 {
                 second = limit > second ? limit - second : limit;
 
                 answer = Math.max(answer, first + second);
-            }
-        }
-
-        // 종료 후 풀이
-        // 임의의 파킹존 두 지점을 선택
-        for (int firstZone = 1; firstZone <= n; firstZone++) {
-            for (int secondZone = 1; secondZone <= n; secondZone++) {
-                if (firstZone == secondZone) continue;
-                // 각 파킹존에 접근할 수 있는 구역를 구한다.
-                List<Integer> firstZoneAccess = new ArrayList<>();
-                List<Integer> secondZoneAccess = new ArrayList<>();
-
-                for (int i = 1; i <= n; i++) {
-                    if (distance[firstZone][i] <= d) {
-                        firstZoneAccess.add(i);
-                    }
-                    if (distance[secondZone][i] <= d) {
-                        secondZoneAccess.add(i);
-                    }
-                }
-
-                // 겹치는 구역을 구한다.
-                List<Integer> overlap = new ArrayList<>();
-                int size1 = firstZoneAccess.size();
-                for (int i = 0; i < size1; i++) {
-                    int size2 = secondZoneAccess.size();
-                    for (int j = 0; j < size2; j++) {
-                        if (firstZoneAccess.get(i) == secondZoneAccess.get(j)) {
-                            overlap.add(firstZoneAccess.get(i));
-                            // 접근 할 수 있는 구역에서 겹치는 구역을 제거한다.
-                            firstZoneAccess.remove(i);
-                            secondZoneAccess.remove(j);
-                        }
-                    }
-                }
-
-                // 겹치지 않는 구역에서 우선 주차할 수 있는 차량의 수를 구한다.
-
-                // 겹치지 않는 구역에서 접근할 수 있는 유저의 수를 구한다.
-                int notOverlapAccessFirstZone = 0;
-                int notOverlapAccessSecondZone = 0;
-
-                for (Integer index : firstZoneAccess) {
-                    notOverlapAccessFirstZone += users[index];
-                }
-
-                for (Integer index : secondZoneAccess) {
-                    notOverlapAccessSecondZone += users[index];
-                }
-
-                // 파킹존의 차량 대수와 유저의 수를 비교하여 주차할 수 있는 차량의 수를 구한다.
-                int firstZoneParking = Math.min(limit, notOverlapAccessFirstZone);
-                int secondZoneParking = Math.min(limit, notOverlapAccessSecondZone);
-
-                // 겹치는 구역에서 접근할 수 있는 유저의 수를 구한다.
-                int overlapAccess = 0;
-
-                for (Integer index : overlap) {
-                    overlapAccess += users[index];
-                }
-
-                // 겹치는 구역에서 주차할 수 있는 차량의 수를 구한다.
-                answer = Math.max(answer, firstZoneParking + secondZoneParking + Math.min(limit * 2 - firstZoneParking - secondZoneParking, overlapAccess));
             }
         }
 
