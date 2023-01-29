@@ -1,4 +1,4 @@
-package Bit;
+package bit;
 
 import java.io.BufferedReader;
 import java.io.IOException;

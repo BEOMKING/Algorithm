@@ -1,4 +1,4 @@
-package Bit;
+package bit;
 
 public class LeetCode_136_SingleNumber {
     /**
